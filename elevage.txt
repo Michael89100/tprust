@@ -1,0 +1,6 @@
+Nom: Moha
+Niveau: 6
+Type: Feu
+XP: 50
+Genre: Male
+
