@@ -84,7 +84,7 @@ impl Pokemon {
 
     // Vérifie si deux Pokemon peuvent se reproduire selon les règles 
     fn peuvent_se_reproduire(&self, autre: &Pokemon) -> bool {
-        let niveau_min = 5;
+        let niveau_min = 1;
         self.p_type == autre.p_type &&
         self.niveau >= niveau_min &&
         autre.niveau >= niveau_min &&
