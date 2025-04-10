@@ -1,6 +1,30 @@
-Nom: Moha
+Nom   : test
+Niveau: 1
+Type  : Feu
+XP    : 6
+Genre : Femelle
+
+Nom   : test
+Niveau: 2
+Type  : Feu
+XP    : 2
+Genre : Male
+
+Nom   : test1
+Niveau: 2
+Type  : Feu
+XP    : 2
+Genre : Femelle
+
+Nom   : mich
+Niveau: 10
+Type  : Eau
+XP    : 3
+Genre : Male
+
+Nom   : dieu
 Niveau: 6
-Type: Feu
-XP: 50
-Genre: Male
+Type  : Plante
+XP    : 51
+Genre : Femelle
 

@@ -2,6 +2,7 @@ use std::fmt;
 use std::io;
 use std::io::Write;
 use std::fs::File;
+use rand::Rng;  // Pour générer des valeurs aléatoires
 
 // Enum pour représenter les types de Pokemon
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
@@ -81,8 +82,7 @@ impl Pokemon {
         println!("Genre : {}", self.genre);
     }
 
-    // Vérifie si deux Pokemon peuvent se reproduire selon les règles :
-    // même type, niveau minimum (ici 5), genres opposés
+    // Vérifie si deux Pokemon peuvent se reproduire selon les règles 
     fn peuvent_se_reproduire(&self, autre: &Pokemon) -> bool {
         let niveau_min = 5;
         self.p_type == autre.p_type &&
@@ -91,11 +91,13 @@ impl Pokemon {
         self.genre != autre.genre
     }
 
-    // Tente la reproduction. En cas de succès, retourne un nouveau Pokemon avec:
-    // niveau 1, XP 0, même type et nom "Mystere"
+    // Tente la reproduction En cas de succès, retourne un nouveau Pokemon avec:
+    // niveau 1, XP 0, même type et nom généré aléatoirement
     fn reproduction(&self, autre: &Pokemon) -> Option<Pokemon> {
         if self.peuvent_se_reproduire(autre) {
-            Some(Pokemon::new("Mystere", 1, self.p_type.clone(), 0, Genre::Male))
+            let nom_nouveau = format!("{}-{}", self.nom, autre.nom);  // Utilisation des noms des parents
+            let genre_nouveau = if rand::thread_rng().gen_bool(0.5) { Genre::Male } else { Genre::Femelle };
+            Some(Pokemon::new(&nom_nouveau, 1, self.p_type.clone(), 0, genre_nouveau))
         } else {
             None
         }
@@ -144,6 +146,7 @@ impl Elevage {
                 println!("Reproduction réussie ! Nouveau Pokemon généré :");
                 nouveau.afficher();
                 self.ajouter_pokemon(nouveau);
+                self.sauvegarder("elevage.txt");  // Sauvegarder après l'ajout du nouveau Pokémon
             } else {
                 println!("Reproduction impossible entre {} et {}", p1.nom, p2.nom);
             }
@@ -283,7 +286,6 @@ fn main() {
                 println!("Pokemon triés par type.");
                 elevage.sauvegarder(filename);
             }
-        
             "7" => {
                 println!("Au revoir !");
                 break;
